@@ -60,6 +60,19 @@ RSpec.configure do |config|
   config.before :suite do
     DatabaseRewinder.clean_all
     FactoryGirl.reload
+
+    # Rake tasks
+    rake = Rake::Application.new
+    Rake.application = rake
+    Rake.application.rake_require 'tasks/import'
+    Rake.application.rake_require 'tasks/evaluation'
+    Rake::Task.define_task(:environment)
+
+    # Data
+    FileUtils.rm_r("/tmp/MC2-training") if Dir.exists?("/tmp/MC2-training")
+    FileUtils.rm_r("/tmp/MC2-test") if Dir.exists?("/tmp/MC2-test")
+    rake['import:download_training_data'].execute
+    rake['import:download_test_data'].execute
   end
 
   config.before(:each, type: lambda {|v| v != :feature}) do
@@ -69,4 +82,5 @@ RSpec.configure do |config|
   config.after(:each, type: lambda {|v| v != :feature}) do
     DatabaseRewinder.clean
   end
+
 end

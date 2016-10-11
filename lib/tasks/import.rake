@@ -169,7 +169,7 @@ namespace :import do
   end
 
   desc "Import test data"
-  task :test_data => [:download_test_data] do
+  task :test_data => :download_test_data do
     queries = import_query(TestJaQuery, TEST_FOLDERPATH, TEST_J_QUERY_PATH)
     iunits = import_test_iunits(TestJaIunit,
       TEST_FOLDERPATH, TEST_J_IUNIT_PATH, queries)

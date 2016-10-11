@@ -2,14 +2,9 @@ require 'rails_helper'
 require 'rake'
 
 describe 'rake import' do
-  TRAINING_RAKE = 'import:training_data'
-  TEST_RAKE = 'import:test_data'
 
-  before(:all) do
-    @rake = Rake::Application.new
-    Rake.application = @rake
-    Rake.application.rake_require 'tasks/import' 
-    Rake::Task.define_task(:environment)
+  before :all do
+    @rake = Rake.application
   end
 
   after(:all) do
@@ -18,19 +13,12 @@ describe 'rake import' do
     FactoryGirl.reload
   end
 
-  before(:each) do
-    @rake[task].reenable
-  end
-
   describe 'import:training_data' do
-    let(:task) { TRAINING_RAKE }
     folderpath = '/tmp/MC2-training'
     filepath = "#{folderpath}/en/1C2-E-queries.tsv"
 
     before :all do
-      FileUtils.rm_r(folderpath) if Dir.exists?(folderpath)
-      raise Exception.new("Downloaded file still exists") if Dir.exists?(folderpath)
-      @rake[TRAINING_RAKE].invoke
+      @rake['import:training_data'].execute
     end
 
     it 'downloads the data' do
@@ -40,7 +28,7 @@ describe 'rake import' do
     it 'deletes the current data' do
       q = TrainingEnQuery.create(qid: "Dummy", content: "Dummy")
       i = TrainingEnIunit.create(qid: "Dummy", uid: "Dummy", query_id: q.id)
-      @rake[TRAINING_RAKE].invoke
+      @rake['import:training_data'].execute
       expect{ TrainingEnQuery.find(q.id) }.to raise_error(ActiveRecord::RecordNotFound)
       expect{ TrainingEnIunit.find(i.id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
@@ -74,26 +62,16 @@ describe 'rake import' do
   end
 
   describe 'import:test_data' do
-    let(:task) { TEST_RAKE }
+    let(:task) { 'import:test_data' }
     folderpath = '/tmp/MC2-test'
     filepath = "#{folderpath}/en/MC2-E-queries.tsv"
-    eval_folderpath = '/tmp/MC2-test-eval'
-    eval_filepath = "#{eval_folderpath}/en/MC2-E-importance.tsv"
 
     before :all do
-      FileUtils.rm_r(folderpath) if Dir.exists?(folderpath)
-      raise Exception.new("Downloaded file still exists") if Dir.exists?(folderpath)
-      FileUtils.rm_r(eval_folderpath) if Dir.exists?(eval_folderpath)
-      raise Exception.new("Downloaded file still exists") if Dir.exists?(eval_folderpath)
-      @rake[TEST_RAKE].invoke
+      @rake['import:test_data'].execute
     end
 
     it 'downloads the data' do
       expect(File.exists?(filepath)).to be_truthy
-    end
-
-    it 'downloads the eval data' do
-      expect(File.exists?(eval_filepath)).to be_truthy
     end
 
     it 'deletes the current data' do
@@ -105,7 +83,7 @@ describe 'rake import' do
       j = TestEnJudge.create!(qid: "Dummy", iid: "Dummy", uid: "Dummy",
         importance: 0, query_id: q.id, intent_id: i.id, iunit_id: u.uid)
 
-      @rake[TEST_RAKE].invoke
+      @rake['import:test_data'].execute
       expect{ TestEnQuery.find(q.id) }.to raise_error(ActiveRecord::RecordNotFound)
       expect{ TestEnIunit.find(u.id) }.to raise_error(ActiveRecord::RecordNotFound)
       expect{ TestEnIunit.find(i.id) }.to raise_error(ActiveRecord::RecordNotFound)

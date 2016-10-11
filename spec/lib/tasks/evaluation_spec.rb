@@ -2,16 +2,11 @@ require 'rails_helper'
 require 'rake'
 
 describe 'rake evaluation' do
-  TRAINING_RAKE = 'import:training_data'
-  TEST_RAKE = 'import:test_data'
   EVALUATE_RAKE = 'evaluation:evaluate'
+  OUTPUT_FOLDERPATH = '/tmp/'
 
-  before(:all) do
-    @rake = Rake::Application.new
-    Rake.application = @rake
-    Rake.application.rake_require 'tasks/import'
-    Rake.application.rake_require 'tasks/evaluation'
-    Rake::Task.define_task(:environment)
+  before :all do
+    @rake = Rake.application
   end
 
   after(:all) do
@@ -24,26 +19,17 @@ describe 'rake evaluation' do
     let(:task) { EVALUATE_RAKE }
 
     context 'training' do
-      folderpath = '/tmp/MC2-training'
-      output_folderpath = '/tmp/'
-
       before :all do
-        FileUtils.rm_r(folderpath) if Dir.exists?(folderpath)
-        raise Exception.new("Downloaded file still exists") if Dir.exists?(folderpath)
-        @rake[TRAINING_RAKE].invoke
-      end
-
-      before(:each) do
-        @rake[task].reenable
+        @rake['import:training_data'].execute
       end
 
       it 'evaluate an English run' do
         filename = 'random_ranking_method.tsv'
         ENV['input_filepath'] = fixture_file("/runs/#{filename}")
-        ENV['output_filepath'] = output_folderpath + filename
+        ENV['output_filepath'] = OUTPUT_FOLDERPATH + filename
         ENV['runtype'] = 'training_retrieval_en'
 
-        @rake[task].invoke
+        @rake[task].execute
 
         csv = CSV.readlines(ENV['output_filepath'], 
           col_sep: "\t", headers: true)
@@ -59,10 +45,10 @@ describe 'rake evaluation' do
       it 'evaluate a Japanese run' do
         filename = 'random_ranking_method_ja.tsv'
         ENV['input_filepath'] = fixture_file("/runs/#{filename}")
-        ENV['output_filepath'] = output_folderpath + filename
+        ENV['output_filepath'] = OUTPUT_FOLDERPATH + filename
         ENV['runtype'] = 'training_retrieval_ja'
 
-        @rake[task].invoke
+        @rake[task].execute
 
         csv = CSV.readlines(ENV['output_filepath'], 
           col_sep: "\t", headers: true)
@@ -77,26 +63,17 @@ describe 'rake evaluation' do
     end
 
     context 'test' do
-      folderpath = '/tmp/MC2-test'
-      output_folderpath = '/tmp/'
-
       before :all do
-        FileUtils.rm_r(folderpath) if Dir.exists?(folderpath)
-        raise Exception.new("Downloaded file still exists") if Dir.exists?(folderpath)
-        @rake[TEST_RAKE].invoke
-      end
-
-      before(:each) do
-        @rake[task].reenable
+        @rake['import:test_data'].execute
       end
 
       it 'evaluate an English retrieval run' do
         filename = 'test_random_ranking_method.tsv'
         ENV['input_filepath'] = fixture_file("/runs/#{filename}")
-        ENV['output_filepath'] = output_folderpath + filename
+        ENV['output_filepath'] = OUTPUT_FOLDERPATH + filename
         ENV['runtype'] = 'test_retrieval_en'
 
-        @rake[task].invoke
+        @rake[task].execute
 
         csv = CSV.readlines(ENV['output_filepath'], 
           col_sep: "\t", headers: true)
@@ -112,10 +89,10 @@ describe 'rake evaluation' do
       it 'evaluate a Japanese retrieval run' do
         filename = 'test_random_ranking_method_ja.tsv'
         ENV['input_filepath'] = fixture_file("/runs/#{filename}")
-        ENV['output_filepath'] = output_folderpath + filename
+        ENV['output_filepath'] = OUTPUT_FOLDERPATH + filename
         ENV['runtype'] = 'test_retrieval_ja'
 
-        @rake[task].invoke
+        @rake[task].execute
 
         csv = CSV.readlines(ENV['output_filepath'], 
           col_sep: "\t", headers: true)
@@ -131,10 +108,10 @@ describe 'rake evaluation' do
       it 'evaluate an English summarization run' do
         filename = 'random_summarization_method.xml'
         ENV['input_filepath'] = fixture_file("/runs/#{filename}")
-        ENV['output_filepath'] = output_folderpath + filename
+        ENV['output_filepath'] = OUTPUT_FOLDERPATH + filename
         ENV['runtype'] = 'test_summarization_en'
 
-        @rake[task].invoke
+        @rake[task].execute
 
         csv = CSV.readlines(ENV['output_filepath'], 
           col_sep: "\t", headers: true)
@@ -148,10 +125,10 @@ describe 'rake evaluation' do
       it 'evaluate a Japanese summarization run' do
         filename = 'random_summarization_method_ja.xml'
         ENV['input_filepath'] = fixture_file("/runs/#{filename}")
-        ENV['output_filepath'] = output_folderpath + filename
+        ENV['output_filepath'] = OUTPUT_FOLDERPATH + filename
         ENV['runtype'] = 'test_summarization_ja'
 
-        @rake[task].invoke
+        @rake[task].execute
 
         csv = CSV.readlines(ENV['output_filepath'], 
           col_sep: "\t", headers: true)
