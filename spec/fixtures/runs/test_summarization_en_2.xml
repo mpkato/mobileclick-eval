@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <sysdesc>
+  Organizers' Baseline
+  </sysdesc>
+  <result qid="MC2-E-0001">
+    <first>
+      <iunit uid="MC2-E-0001-0005" />
+      <iunit uid="MC2-E-0001-0004" />
+      <link iid="MC2-E-0001-INTENT0002" />
+      <iunit uid="MC2-E-0001-0003" />
+      <link iid="MC2-E-0001-INTENT0003" />
+    </first>
+    <second iid="MC2-E-0001-INTENT0002">
+      <iunit uid="MC2-E-0001-0001" />
+      <iunit uid="MC2-E-0001-0002" />
+    </second>
+    <second iid="MC2-E-0001-INTENT0003">
+      <iunit uid="MC2-E-0001-0003" />
+      <iunit uid="MC2-E-0001-0004" />
+    </second>
+  </result>
+  <result qid="MC2-E-0002">
+    <first>
+      <iunit uid="MC2-E-0002-0005" />
+      <iunit uid="MC2-E-0002-0003" />
+      <iunit uid="MC2-E-0002-0004" />
+      <link iid="MC2-E-0002-INTENT0002" />
+      <link iid="MC2-E-0002-INTENT0003" />
+    </first>
+    <second iid="MC2-E-0002-INTENT0002">
+      <iunit uid="MC2-E-0002-0001" />
+    </second>
+    <second iid="MC2-E-0002-INTENT0003">
+      <iunit uid="MC2-E-0002-0001" />
+    </second>
+  </result>
+</results>
+

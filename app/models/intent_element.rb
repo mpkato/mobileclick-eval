@@ -1,0 +1,2 @@
+class IntentElement < Element
+end

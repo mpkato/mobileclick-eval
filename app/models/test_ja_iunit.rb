@@ -1,0 +1,3 @@
+class TestJaIunit < Iunit
+end
+

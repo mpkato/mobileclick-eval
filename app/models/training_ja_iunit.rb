@@ -1,0 +1,3 @@
+class TrainingJaIunit < Iunit
+end
+

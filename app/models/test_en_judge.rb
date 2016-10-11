@@ -1,0 +1,2 @@
+class TestEnJudge < Judge
+end

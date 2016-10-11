@@ -1,0 +1,3 @@
+class TestJaIntent < Intent
+end
+

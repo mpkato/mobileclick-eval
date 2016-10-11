@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <sysdesc>
+  Organizers' Baseline
+  </sysdesc>
+  <result qid="MC2-E-0001">
+    <first>
+    </first>
+  </result>
+  <result qid="MC2-E-0002">
+    <first>
+      <link iid="MC2-E-0002-INTENT0001" />
+      <link iid="MC2-E-0002-INTENT0002" />
+    </first>
+    <second iid="MC2-E-0002-INTENT0001">
+    </second>
+    <second iid="MC2-E-0002-INTENT0002">
+    </second>
+  </result>
+</results>

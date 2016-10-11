@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <sysdesc>
+  Organizers' Baseline
+  </sysdesc>
+  <result qid="MC-E-0001">
+    <first>
+      <iunit uid="MC-E-0001-U001" />
+      <iunit uid="MC-E-0001-U003" />
+      <link iid="MC-E-0001-I006" />
+      <iunit uid="MC-E-0001-U004" />
+      <link iid="MC-E-0001-I002" />
+      <lin />
+    </first>
+    <second iid="MC-E-0001-I006">
+      <iunit uid="MC-E-0001-U011" />
+      <iunit uid="MC-E-0001-U019" />
+    </second>
+    <second iid="MC-E-0001-I002">
+      <iunit uid="MC-E-0001-U029" />
+      <iunit uid="MC-E-0001-U021" />
+    </second>
+  </result>
+</results>

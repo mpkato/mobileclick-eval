@@ -1,0 +1,21 @@
+training_data_url: "https://www.dropbox.com/s/6vy2doyzqeey903/MC2-training.tar.gz?dl=1"
+test_data_url: "https://www.dropbox.com/s/z8kfq239u5ekc3p/MC2-test.tar.gz?dl=1"
+l_of_u:
+  en: 840
+  ja: 560
+length_limit:
+  en: 420
+  ja: 280
+dtd: |
+  <!ELEMENT results (sysdesc, result*)>
+  <!ELEMENT sysdesc (#PCDATA)>
+  <!ELEMENT result (first, second*)>
+  <!ELEMENT first (iunit | link)*>
+  <!ELEMENT second (iunit)*>
+  <!ELEMENT iunit EMPTY>
+  <!ELEMENT link EMPTY>
+  <!ATTLIST result qid NMTOKEN #REQUIRED>
+  <!ATTLIST iunit uid NMTOKEN #REQUIRED>
+  <!ATTLIST link iid NMTOKEN #REQUIRED>
+  <!ATTLIST second iid NMTOKEN #REQUIRED>
+

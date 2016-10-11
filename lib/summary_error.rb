@@ -1,0 +1,2 @@
+class SummaryError < StandardError
+end

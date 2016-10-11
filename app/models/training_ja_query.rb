@@ -1,0 +1,3 @@
+class TrainingJaQuery < Query
+end
+
