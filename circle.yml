@@ -1,0 +1,5 @@
+dependencies:
+    pre:
+        - echo $TEST_EVAL_URL
+        - wget $TEST_EVAL_URL -O ./MC2-test-eval.tar.gz
+        - tar fzxv ./MC2-test-eval.tar.gz
