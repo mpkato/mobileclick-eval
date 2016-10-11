@@ -22,3 +22,4 @@ config/environments/*.local.yml
 
 /vendor
 /MC2-test-eval
+/.ruby-version
