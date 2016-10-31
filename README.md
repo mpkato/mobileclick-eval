@@ -12,6 +12,8 @@ obtained through the website.
 - Ruby (tested in 2.1.4)
 - Bundler (tested in 1.9.4)
 - gems listed in Gemfile
+- SQLite engine for installing `sqlite3` gem (e.g. `sqlite-devel` or `libsqlite3-dev`)
+- libxml2 for installing `libxml-ruby` gem (e.g. `libxml2-devel` or `libxml2-dev`)
 
 
 ## Installation
@@ -24,7 +26,7 @@ Please clone (or copy) this project into your PC:
 git clone https://github.com/mpkato/mobileclick-eval.git
 ```
 
-Then, you can move to this project directory 
+Then, you can move to this project directory
 ```
 cd mobileclick-eval
 ```
@@ -34,7 +36,7 @@ and stay at this directory during the following steps.
 
 ### Deploying evaluation data
 
-To evaluate your MobileClick-2 runs, you need to obtain [NTCIR-12 MobileClick-2 Test Collection](http://research.nii.ac.jp/ntcir/permission/ntcir-12/perm-en-MobileClick.html) (you can easily obtain this test collection by applying at http://www.nii.ac.jp/dsc/idr/en/ntcir/ntcir.html ). 
+To evaluate your MobileClick-2 runs, you need to obtain [NTCIR-12 MobileClick-2 Test Collection](http://research.nii.ac.jp/ntcir/permission/ntcir-12/perm-en-MobileClick.html) (you can easily obtain this test collection by applying at http://www.nii.ac.jp/dsc/idr/en/ntcir/ntcir.html ).
 `MC2-test-eval.tar.gz` should be put at the root directory of this project and be unpacked as follows:
 
 ```
@@ -68,7 +70,7 @@ Gems are Ruby libraries and can be installed through Bundler. Type the command b
 bundle install --path vendor/bundle
 ```
 
-Gems are installed at `vendor/bundle`. 
+Gems are installed at `vendor/bundle`.
 When you have any problems at the gem installation, please try to find solutions on the Web.
 
 
@@ -99,7 +101,7 @@ You can evaluate six types of runs:
 - `test_retrieval_en` English iUnit Ranking (Test):Please generate an iUnit ranking run for a list of English queries in the test data.
 - `test_retrieval_ja` Japanese iUnit Ranking (Test): Please generate an iUnit ranking run for a list of Japanese queries in the test data.
 - `test_summarization_en` English iUnit Summarization (Test): Please generate an iUnit summarization run for a list of English queries in the test data.
-- `test_summarization_ja` Japanese iUnit Summarization (Test): Please generate an iUnit summarization run for a list of Japanese queries in the test data. 
+- `test_summarization_ja` Japanese iUnit Summarization (Test): Please generate an iUnit summarization run for a list of Japanese queries in the test data.
 
 
 Suppose you want to evaluate a `[runtype]` run stored in `[input_filepath]` and to output the evaluation result at `[output_filepath]`.
@@ -119,4 +121,3 @@ be rake evaluation:evaluate input_filepath=./spec/fixtures/runs/random_ranking_m
 ```
 
 Evaluation results are output at `result.tsv` in this example.
-
